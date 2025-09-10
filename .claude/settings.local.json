@@ -22,7 +22,9 @@
       "Bash(npm link:*)",
       "Bash(soft-awake:*)",
       "Bash(git push:*)",
-      "Bash(npm test:*)"
+      "Bash(npm test:*)",
+      "Bash(npm publish:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []
