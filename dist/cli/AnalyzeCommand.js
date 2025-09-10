@@ -69,6 +69,13 @@ class AnalyzeCommand {
         }
         catch (error) {
             console.error(`Error: ${error.message}`);
+            if (error.message.includes('No package names provided') ||
+                error.message.includes('Invalid format') ||
+                error.message.includes('Depth must be between') ||
+                error.message.includes('Invalid severity level') ||
+                error.message.includes('Timeout must be between')) {
+                return 1;
+            }
             if (error.message.includes('NetworkError')) {
                 return 4;
             }

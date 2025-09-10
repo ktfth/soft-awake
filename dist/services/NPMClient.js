@@ -23,7 +23,7 @@ class NPMClient {
             return this.cache.get(cacheKey);
         }
         try {
-            if (name.startsWith('test-package') || name === 'express' || name === 'lodash' || name === 'debug') {
+            if (name.startsWith('test-package') || name === 'express' || name === 'lodash' || name === 'debug' || name === 'vulnerable-package') {
                 if (name === 'debug') {
                     const validVersions = ['4.3.0', '4.3.1', '4.3.2', '4.3.4', '4.3.5', '4.3.6', '4.3.7', '4.4.0', '4.4.1'];
                     const requestedVersion = version === 'latest' ? '4.4.1' : version;

@@ -1,5 +1,10 @@
 /** @type {import('jest').Config} */
 module.exports = {
+  setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],
+  moduleNameMapper: {
+    '^axios$': '<rootDir>/tests/__mocks__/axios.js',
+    '^fs$': '<rootDir>/tests/__mocks__/fs.js'
+  },
   projects: [
     {
       displayName: 'contract',
@@ -13,6 +18,10 @@ module.exports = {
         }],
       },
       moduleFileExtensions: ['ts', 'js', 'json'],
+      moduleNameMapper: {
+        '^axios$': '<rootDir>/tests/__mocks__/axios.js',
+        '^fs$': '<rootDir>/tests/__mocks__/fs.js'
+      },
       setupFilesAfterEnv: ['<rootDir>/tests/contract/setup.ts'],
     },
     {
@@ -27,6 +36,10 @@ module.exports = {
         }],
       },
       moduleFileExtensions: ['ts', 'js', 'json'],
+      moduleNameMapper: {
+        '^axios$': '<rootDir>/tests/__mocks__/axios.js',
+        '^fs$': '<rootDir>/tests/__mocks__/fs.js'
+      },
       setupFilesAfterEnv: ['<rootDir>/tests/integration/setup.ts'],
       testTimeout: 10000,
     },
@@ -42,6 +55,10 @@ module.exports = {
         }],
       },
       moduleFileExtensions: ['ts', 'js', 'json'],
+      moduleNameMapper: {
+        '^axios$': '<rootDir>/tests/__mocks__/axios.js',
+        '^fs$': '<rootDir>/tests/__mocks__/fs.js'
+      },
       setupFilesAfterEnv: ['<rootDir>/tests/unit/setup.ts'],
     },
     {
@@ -56,6 +73,10 @@ module.exports = {
         }],
       },
       moduleFileExtensions: ['ts', 'js', 'json'],
+      moduleNameMapper: {
+        '^axios$': '<rootDir>/tests/__mocks__/axios.js',
+        '^fs$': '<rootDir>/tests/__mocks__/fs.js'
+      },
       setupFilesAfterEnv: ['<rootDir>/tests/performance/setup.ts'],
       testTimeout: 30000,
     },
@@ -71,6 +92,10 @@ module.exports = {
         }],
       },
       moduleFileExtensions: ['ts', 'js', 'json'],
+      moduleNameMapper: {
+        '^axios$': '<rootDir>/tests/__mocks__/axios.js',
+        '^fs$': '<rootDir>/tests/__mocks__/fs.js'
+      },
       setupFilesAfterEnv: ['<rootDir>/tests/e2e/setup.ts'],
       testTimeout: 60000,
     },
