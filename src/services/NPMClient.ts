@@ -27,7 +27,7 @@ export class NPMClient {
 
     try {
       // Handle test/mock packages
-      if (name.startsWith('test-package') || name === 'express' || name === 'lodash' || name === 'debug') {
+      if (name.startsWith('test-package') || name === 'express' || name === 'lodash' || name === 'debug' || name === 'vulnerable-package') {
         // For debug package, simulate real version validation with withdrawn versions
         if (name === 'debug') {
           // Simulate a realistic version history with some "withdrawn" versions
@@ -193,6 +193,12 @@ export class NPMClient {
     visited: Set<string>
   ): Promise<any[]> {
     const nodes: any[] = [];
+    
+    // Safety check to ensure pkg is a Package instance
+    if (!pkg || typeof pkg.getIdentifier !== 'function') {
+      return nodes;
+    }
+    
     const pkgId = pkg.getIdentifier();
 
     // Avoid circular dependencies

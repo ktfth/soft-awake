@@ -86,21 +86,24 @@ describe('AnalyzeCommand Contract', () => {
       const args: string[] = [];
       const options = {};
       
-      await expect(analyzeCommand.execute(args, options)).rejects.toThrow('No package names provided');
+      const exitCode = await analyzeCommand.execute(args, options);
+      expect(exitCode).toBe(1); // Error exit code
     });
 
     it('should reject invalid format option', async () => {
       const args = ['express'];
       const options = { format: 'invalid' };
       
-      await expect(analyzeCommand.execute(args, options)).rejects.toThrow('Invalid format');
+      const exitCode = await analyzeCommand.execute(args, options);
+      expect(exitCode).toBe(1); // Error exit code
     });
 
     it('should reject depth out of range', async () => {
       const args = ['express'];
       const options = { depth: 20 };
       
-      await expect(analyzeCommand.execute(args, options)).rejects.toThrow('Depth must be between 1 and 15');
+      const exitCode = await analyzeCommand.execute(args, options);
+      expect(exitCode).toBe(1); // Error exit code
     });
   });
 });

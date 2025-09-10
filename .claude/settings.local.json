@@ -21,7 +21,8 @@
       "Bash(npm-sec-analyzer analyze:*)",
       "Bash(npm link:*)",
       "Bash(soft-awake:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npm test:*)"
     ],
     "deny": [],
     "ask": []

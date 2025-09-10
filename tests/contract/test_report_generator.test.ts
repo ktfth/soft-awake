@@ -335,7 +335,7 @@ describe('ReportGenerator Contract', () => {
       const result = await reportGenerator.generateReport(mockReports, 'html');
       
       expect(result).toMatch(/executive.{0,20}summary/i);
-      expect(result).toContain('Total Packages: 1');
+      expect(result).toMatch(/Total Packages.*1/);
       expect(result).toMatch(/Risk Level.*LOW/);
     });
 

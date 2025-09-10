@@ -108,6 +108,15 @@ export class AnalyzeCommand {
     } catch (error: any) {
       console.error(`Error: ${error.message}`);
       
+      // Validation errors
+      if (error.message.includes('No package names provided') || 
+          error.message.includes('Invalid format') || 
+          error.message.includes('Depth must be between') ||
+          error.message.includes('Invalid severity level') ||
+          error.message.includes('Timeout must be between')) {
+        return 1; // Validation error
+      }
+      
       if (error.message.includes('NetworkError')) {
         return 4;
       }

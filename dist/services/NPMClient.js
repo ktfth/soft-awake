@@ -141,6 +141,9 @@ class NPMClient {
     }
     async buildDependencyNodes(pkg, currentDepth, maxDepth, visited) {
         const nodes = [];
+        if (!pkg || typeof pkg.getIdentifier !== 'function') {
+            return nodes;
+        }
         const pkgId = pkg.getIdentifier();
         if (visited.has(pkgId) || currentDepth > maxDepth) {
             return nodes;
