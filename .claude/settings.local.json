@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(scripts/create-new-feature.sh:*)",
+      "Bash(scripts/setup-plan.sh:*)",
+      "WebSearch",
+      "Bash(scripts/update-agent-context.sh:*)",
+      "Bash(dir \"C:\\Users\\Usuario\\war\\soft-awake\\specs\\001-preciso-construir-uma\")",
+      "Bash(dir \"C:\\Users\\Usuario\\war\\soft-awake\\specs\\001-preciso-construir-uma\\contracts\")",
+      "Bash(scripts/check-task-prerequisites.sh:*)",
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(npm test)",
+      "Bash(npm run test:contract:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout 30 npm run dev -- analyze express --timeout 10)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

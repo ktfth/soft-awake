@@ -1,0 +1,484 @@
+# API Schema Contract: NPM Package Malware Analysis System
+# Version: 1.0.0  
+# Description: Data structures and API contracts for internal services
+
+openapi: 3.0.3
+info:
+  title: NPM Package Malware Analysis API
+  description: Internal API schemas for malware analysis services
+  version: 1.0.0
+
+components:
+  schemas:
+    Package:
+      type: object
+      required:
+        - name
+        - version
+        - publishedDate
+      properties:
+        name:
+          type: string
+          pattern: '^[a-z0-9][a-z0-9-._]*$'
+          description: Package name following npm naming rules
+          example: "express"
+        version:
+          type: string
+          pattern: '^\\d+\\.\\d+\\.\\d+(?:-[\\w.-]+)?(?:\\+[\\w.-]+)?$'
+          description: Semantic version
+          example: "4.18.2"
+        description:
+          type: string
+          description: Package description from package.json
+          example: "Fast, unopinionated, minimalist web framework"
+        maintainers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageMaintainer'
+        downloadCount:
+          type: integer
+          minimum: 0
+          description: Weekly download count
+          example: 25000000
+        repositoryUrl:
+          type: string
+          format: uri
+          description: Source code repository URL
+          example: "https://github.com/expressjs/express"
+        homepage:
+          type: string
+          format: uri
+          description: Package homepage URL
+        license:
+          type: string
+          description: License identifier
+          example: "MIT"
+        publishedDate:
+          type: string
+          format: date-time
+          description: When this version was published
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageDependency'
+        devDependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackageDependency'
+
+    PackageMaintainer:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Maintainer name
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          description: Maintainer email address
+          example: "john@example.com"
+        url:
+          type: string
+          format: uri
+          description: Maintainer profile URL
+
+    PackageDependency:
+      type: object
+      required:
+        - name
+        - version
+        - optional
+      properties:
+        name:
+          type: string
+          description: Dependency package name
+          example: "lodash"
+        version:
+          type: string
+          description: Version constraint
+          example: "^4.17.21"
+        optional:
+          type: boolean
+          description: Whether dependency is optional
+          default: false
+
+    AnalysisReport:
+      type: object
+      required:
+        - packageName
+        - packageVersion
+        - analysisId
+        - timestamp
+        - overallRiskScore
+        - riskLevel
+        - securityAlerts
+        - analysisMetadata
+        - executionTime
+        - cacheExpiry
+      properties:
+        packageName:
+          type: string
+          description: Name of analyzed package
+          example: "express"
+        packageVersion:
+          type: string
+          description: Version of analyzed package
+          example: "4.18.2"
+        analysisId:
+          type: string
+          format: uuid
+          description: Unique analysis identifier
+        timestamp:
+          type: string
+          format: date-time
+          description: When analysis was performed
+        overallRiskScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Overall risk score (higher = more risky)
+          example: 25
+        riskLevel:
+          $ref: '#/components/schemas/RiskLevel'
+        securityAlerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecurityAlert'
+        analysisMetadata:
+          $ref: '#/components/schemas/AnalysisMetadata'
+        recommendations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AlternativeRecommendation'
+        executionTime:
+          type: integer
+          minimum: 1
+          description: Analysis duration in milliseconds
+          example: 2500
+        cacheExpiry:
+          type: string
+          format: date-time
+          description: When cached result expires
+
+    SecurityAlert:
+      type: object
+      required:
+        - alertId
+        - packageName  
+        - packageVersion
+        - severity
+        - category
+        - title
+        - description
+        - detectionMethod
+        - confidence
+      properties:
+        alertId:
+          type: string
+          description: Unique alert identifier
+          example: "alert_express_4.18.2_001"
+        packageName:
+          type: string
+          description: Affected package name
+          example: "express"
+        packageVersion:
+          type: string
+          description: Affected package version
+          example: "4.18.2"
+        severity:
+          $ref: '#/components/schemas/Severity'
+        category:
+          $ref: '#/components/schemas/AlertCategory'
+        title:
+          type: string
+          description: Short alert title
+          example: "Outdated dependency with known vulnerability"
+        description:
+          type: string
+          description: Detailed vulnerability description
+        cveId:
+          type: string
+          pattern: '^CVE-\\d{4}-\\d+$'
+          description: CVE identifier if applicable
+          example: "CVE-2024-12345"
+        referenceUrls:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: Links to vulnerability reports
+        detectionMethod:
+          $ref: '#/components/schemas/DetectionMethod'
+        confidence:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Detection confidence percentage
+          example: 95
+        remediation:
+          type: string
+          description: Suggested fix or mitigation
+        affectedVersions:
+          type: string
+          description: Version range affected
+          example: "<4.18.3"
+        fixedInVersion:
+          type: string
+          description: Version where issue was resolved
+          example: "4.18.3"
+
+    AlternativeRecommendation:
+      type: object
+      required:
+        - originalPackage
+        - recommendedPackage
+        - recommendedVersion
+        - justification
+        - securityScore
+        - popularityScore
+        - maintenanceScore
+        - lastUpdated
+        - migrationEffort
+      properties:
+        originalPackage:
+          type: string
+          description: Package being replaced
+          example: "request"
+        recommendedPackage:
+          type: string
+          description: Suggested alternative package
+          example: "axios"
+        recommendedVersion:
+          type: string
+          description: Specific version to use
+          example: "^1.6.0"
+        justification:
+          type: string
+          description: Why this alternative is safer
+          example: "Actively maintained with recent security updates"
+        securityScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Security score (higher = better)
+          example: 95
+        popularityScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Popularity score (higher = more popular)
+          example: 88
+        maintenanceScore:
+          type: integer
+          minimum: 0
+          maximum: 100
+          description: Maintenance score (higher = better maintained)
+          example: 92
+        compatibilityNotes:
+          type: string
+          description: Migration or compatibility considerations
+          example: "API is largely compatible, update import statements"
+        lastUpdated:
+          type: string
+          format: date-time
+          description: When recommendation was last verified
+        migrationEffort:
+          $ref: '#/components/schemas/MigrationEffort'
+
+    DependencyTree:
+      type: object
+      required:
+        - rootPackage
+        - nodes
+        - maxDepth
+        - totalNodes
+        - analysisComplete
+        - buildTimestamp
+      properties:
+        rootPackage:
+          $ref: '#/components/schemas/Package'
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/DependencyNode'
+        maxDepth:
+          type: integer
+          minimum: 1
+          maximum: 15
+          description: Maximum depth reached
+          example: 8
+        totalNodes:
+          type: integer
+          minimum: 1
+          description: Total number of dependencies
+          example: 245
+        analysisComplete:
+          type: boolean
+          description: Whether full tree was analyzed
+          example: true
+        criticalPath:
+          type: array
+          items:
+            type: string
+          description: Path to most critical vulnerability
+          example: ["express", "body-parser", "qs"]
+        buildTimestamp:
+          type: string
+          format: date-time
+          description: When tree was constructed
+
+    DependencyNode:
+      type: object
+      required:
+        - package
+        - depth
+        - isDirect
+        - analysisStatus
+      properties:
+        package:
+          $ref: '#/components/schemas/Package'
+        parent:
+          type: string
+          description: Parent package name (null for root)
+          example: "express"
+        depth:
+          type: integer
+          minimum: 0
+          description: Depth in tree (0 for root)
+          example: 2
+        isDirect:
+          type: boolean
+          description: Direct vs transitive dependency
+          example: false
+        analysisStatus:
+          $ref: '#/components/schemas/AnalysisStatus'
+
+    AnalysisMetadata:
+      type: object
+      required:
+        - analyzerId
+        - staticAnalysisTools
+        - analysisDepth
+        - timeoutReached
+      properties:
+        analyzerId:
+          type: string
+          description: Analyzer version identifier
+          example: "npm-sec-analyzer-v1.0.0"
+        llmModel:
+          type: string
+          description: LLM model used for analysis
+          example: "gpt-4-turbo"
+        staticAnalysisTools:
+          type: array
+          items:
+            type: string
+          description: Static analysis tools used
+          example: ["js-x-ray", "NodeSecure", "Semgrep"]
+        analysisDepth:
+          type: integer
+          minimum: 1
+          description: Depth of analysis performed
+          example: 5
+        timeoutReached:
+          type: boolean
+          description: Whether analysis hit time limits
+          example: false
+
+    # Enumerations
+    RiskLevel:
+      type: string
+      enum: ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+      description: Overall risk assessment level
+
+    Severity:
+      type: string
+      enum: ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+      description: Security alert severity level
+
+    AlertCategory:
+      type: string
+      enum: ["MALWARE", "VULNERABILITY", "SUSPICIOUS_CODE", "OUTDATED", "TYPOSQUATTING"]
+      description: Security alert category
+
+    DetectionMethod:
+      type: string
+      enum: ["STATIC_ANALYSIS", "LLM_ANALYSIS", "SIGNATURE_MATCH", "BEHAVIORAL_ANALYSIS"]
+      description: How the security issue was detected
+
+    MigrationEffort:
+      type: string
+      enum: ["LOW", "MEDIUM", "HIGH"]
+      description: Effort required to migrate to alternative
+
+    AnalysisStatus:
+      type: string
+      enum: ["PENDING", "ANALYZING", "COMPLETED", "FAILED", "SKIPPED"]
+      description: Analysis status for dependency node
+
+  # Service Interfaces
+  services:
+    MalwareAnalyzer:
+      description: Core malware analysis service
+      methods:
+        analyzePackage:
+          input:
+            package: Package
+            options: AnalysisOptions
+          output: AnalysisReport
+          errors:
+            - PackageNotFound
+            - AnalysisTimeout
+            - APIRateLimit
+        
+    NPMClient:
+      description: NPM registry API client
+      methods:
+        getPackageInfo:
+          input:
+            name: string
+            version: string
+          output: Package
+          errors:
+            - PackageNotFound
+            - NetworkError
+        getDependencyTree:
+          input:
+            package: Package
+            maxDepth: number
+          output: DependencyTree
+          errors:
+            - TooManyDependencies
+            - CircularDependency
+
+    CacheManager:
+      description: Analysis result caching service
+      methods:
+        get:
+          input:
+            key: string
+          output: AnalysisReport | null
+        set:
+          input:
+            key: string
+            value: AnalysisReport
+            ttl: number
+          output: boolean
+        clear:
+          input: {}
+          output: number
+
+    ReportGenerator:
+      description: Analysis report formatting service
+      methods:
+        generateReport:
+          input:
+            reports: AnalysisReport[]
+            format: string
+          output: string
+          errors:
+            - UnsupportedFormat
+            - TemplateError
