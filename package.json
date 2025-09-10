@@ -21,6 +21,8 @@
     "lint:fix": "eslint src tests --ext .ts --fix",
     "format": "prettier --write src tests",
     "clean": "rimraf dist",
+    "docs": "node -e \"const fs = require('fs'); if (!fs.existsSync('docs')) fs.mkdirSync('docs');\" && npx marked README.md --output docs/index.html --highlight",
+    "docs:serve": "npm run docs && npx http-server docs -p 3000 -o",
     "prepublishOnly": "npm run clean && npm run build && npm run test:publish",
     "test:publish": "jest --testPathIgnorePatterns=\"test_config_command.test.ts|test_npm_client.test.ts\""
   },
@@ -71,7 +73,9 @@
     "eslint": "^9.35.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
+    "http-server": "^14.1.1",
     "jest": "^30.1.3",
+    "marked": "^14.1.2",
     "prettier": "^3.6.2",
     "ts-jest": "^29.4.1"
   }
