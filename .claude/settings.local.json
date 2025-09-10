@@ -20,7 +20,8 @@
       "Bash(curl:*)",
       "Bash(npm-sec-analyzer analyze:*)",
       "Bash(npm link:*)",
-      "Bash(soft-awake:*)"
+      "Bash(soft-awake:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
