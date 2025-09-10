@@ -510,7 +510,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Documentation**: [https://soft-awake.aldeia-viva.com.br/docs](https://soft-awake.aldeia-viva.com.br/docs)
+- **Documentation**: [https://soft-awake.aldeia-viva.com.br](https://soft-awake.aldeia-viva.com.br)
 - **Issues**: [GitHub Issues](https://github.com/ktfth/soft-awake/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/ktfth/soft-awake/discussions)
 - **Security**: security@soft-awake.dev
