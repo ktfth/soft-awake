@@ -1,6 +1,6 @@
 {
   "name": "soft-awake",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Advanced NPM Package Security Analysis Tool with AI-Powered Intelligence",
   "main": "dist/cli/cli.js",
   "bin": {
