@@ -1,10 +1,10 @@
 {
-  "name": "npm-sec-analyzer",
+  "name": "soft-awake",
   "version": "1.0.0",
-  "description": "NPM Package Malware Analysis CLI Tool using LLM for security vulnerability detection",
+  "description": "Advanced NPM Package Security Analysis Tool with AI-Powered Intelligence",
   "main": "dist/cli/cli.js",
   "bin": {
-    "npm-sec-analyzer": "dist/cli/cli.js"
+    "soft-awake": "dist/cli/cli.js"
   },
   "scripts": {
     "build": "tsc",
@@ -33,11 +33,11 @@
     "vulnerability",
     "dependencies"
   ],
-  "author": "NPM Security Analyzer",
+  "author": "Soft Awake Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/npm-sec-analyzer/npm-sec-analyzer.git"
+    "url": "https://github.com/your-org/soft-awake.git"
   },
   "engines": {
     "node": ">=18.0.0"

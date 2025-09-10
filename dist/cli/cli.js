@@ -6,10 +6,11 @@ const AnalyzeCommand_1 = require("./AnalyzeCommand");
 const ScanCommand_1 = require("./ScanCommand");
 const CacheCommand_1 = require("./CacheCommand");
 const ConfigCommand_1 = require("./ConfigCommand");
+const WithdrawnCommand_1 = require("./WithdrawnCommand");
 const program = new commander_1.Command();
 program
-    .name('npm-sec-analyzer')
-    .description('NPM Package Malware Analysis CLI Tool using LLM for security vulnerability detection')
+    .name('soft-awake')
+    .description('Advanced NPM Package Security Analysis Tool with AI-Powered Intelligence')
     .version('1.0.0');
 program
     .command('analyze')
@@ -81,6 +82,22 @@ program
     if (value)
         args.push(value);
     const exitCode = await command.execute(args);
+    process.exit(exitCode);
+});
+program
+    .command('withdrawn')
+    .description('Analyze potentially withdrawn/removed package versions')
+    .argument('<package>', 'NPM package name to analyze')
+    .option('-f, --format <format>', 'Output format (text|json)', 'text')
+    .option('-o, --output <file>', 'Output file path (default: stdout)')
+    .option('-v, --verbose', 'Show detailed analysis information')
+    .action(async (packageName, options) => {
+    const command = new WithdrawnCommand_1.WithdrawnCommand();
+    const exitCode = await command.execute([packageName], {
+        format: options.format,
+        output: options.output,
+        verbose: options.verbose,
+    });
     process.exit(exitCode);
 });
 process.on('uncaughtException', (error) => {

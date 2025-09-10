@@ -78,7 +78,7 @@ describe('ReportGenerator Contract', () => {
           confidence: 85,
         }],
         analysisMetadata: {
-          analyzerId: 'npm-sec-analyzer-v1.0.0',
+          analyzerId: 'soft-awake-v1.0.0',
           staticAnalysisTools: ['js-x-ray'],
           analysisDepth: 3,
           timeoutReached: false,
@@ -136,7 +136,7 @@ describe('ReportGenerator Contract', () => {
           }
         ],
         analysisMetadata: {
-          analyzerId: 'npm-sec-analyzer-v1.0.0',
+          analyzerId: 'soft-awake-v1.0.0',
           llmModel: 'gpt-4-turbo',
           staticAnalysisTools: ['js-x-ray', 'NodeSecure'],
           analysisDepth: 5,
@@ -177,7 +177,7 @@ describe('ReportGenerator Contract', () => {
           confidence: 78,
         }],
         analysisMetadata: {
-          analyzerId: 'npm-sec-analyzer-v1.0.0',
+          analyzerId: 'soft-awake-v1.0.0',
           staticAnalysisTools: ['js-x-ray'],
           analysisDepth: 2,
           timeoutReached: false,
@@ -215,7 +215,7 @@ describe('ReportGenerator Contract', () => {
           confidence: 98,
         }],
         analysisMetadata: {
-          analyzerId: 'npm-sec-analyzer-v1.0.0',
+          analyzerId: 'soft-awake-v1.0.0',
           staticAnalysisTools: ['js-x-ray', 'NodeSecure'],
           analysisDepth: 3,
           timeoutReached: false,
@@ -241,7 +241,7 @@ describe('ReportGenerator Contract', () => {
         riskLevel: 'MEDIUM',
         securityAlerts: [],
         analysisMetadata: {
-          analyzerId: 'npm-sec-analyzer-v1.0.0',
+          analyzerId: 'soft-awake-v1.0.0',
           staticAnalysisTools: ['js-x-ray'],
           analysisDepth: 2,
           timeoutReached: false,
@@ -293,7 +293,7 @@ describe('ReportGenerator Contract', () => {
           referenceUrls: ['https://nvd.nist.gov/vuln/detail/CVE-2024-56789'],
         }],
         analysisMetadata: {
-          analyzerId: 'npm-sec-analyzer-v1.0.0',
+          analyzerId: 'soft-awake-v1.0.0',
           llmModel: 'gpt-4-turbo',
           staticAnalysisTools: ['js-x-ray'],
           analysisDepth: 4,
@@ -323,7 +323,7 @@ describe('ReportGenerator Contract', () => {
         riskLevel: 'LOW',
         securityAlerts: [],
         analysisMetadata: {
-          analyzerId: 'npm-sec-analyzer-v1.0.0',
+          analyzerId: 'soft-awake-v1.0.0',
           staticAnalysisTools: ['js-x-ray'],
           analysisDepth: 1,
           timeoutReached: false,
@@ -349,7 +349,7 @@ describe('ReportGenerator Contract', () => {
         riskLevel: 'MEDIUM',
         securityAlerts: [],
         analysisMetadata: {
-          analyzerId: 'npm-sec-analyzer-v1.0.0',
+          analyzerId: 'soft-awake-v1.0.0',
           staticAnalysisTools: ['js-x-ray'],
           analysisDepth: 3,
           timeoutReached: false,

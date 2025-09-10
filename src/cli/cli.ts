@@ -5,12 +5,13 @@ import { AnalyzeCommand } from './AnalyzeCommand';
 import { ScanCommand } from './ScanCommand';
 import { CacheCommand } from './CacheCommand';
 import { ConfigCommand } from './ConfigCommand';
+import { WithdrawnCommand } from './WithdrawnCommand';
 
 const program = new Command();
 
 program
-  .name('npm-sec-analyzer')
-  .description('NPM Package Malware Analysis CLI Tool using LLM for security vulnerability detection')
+  .name('soft-awake')
+  .description('Advanced NPM Package Security Analysis Tool with AI-Powered Intelligence')
   .version('1.0.0');
 
 // Analyze command
@@ -89,6 +90,24 @@ program
     if (value) args.push(value);
     
     const exitCode = await command.execute(args);
+    process.exit(exitCode);
+  });
+
+// Withdrawn versions command
+program
+  .command('withdrawn')
+  .description('Analyze potentially withdrawn/removed package versions')
+  .argument('<package>', 'NPM package name to analyze')
+  .option('-f, --format <format>', 'Output format (text|json)', 'text')
+  .option('-o, --output <file>', 'Output file path (default: stdout)')
+  .option('-v, --verbose', 'Show detailed analysis information')
+  .action(async (packageName, options) => {
+    const command = new WithdrawnCommand();
+    const exitCode = await command.execute([packageName], {
+      format: options.format,
+      output: options.output,
+      verbose: options.verbose,
+    });
     process.exit(exitCode);
   });
 

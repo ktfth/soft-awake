@@ -17,8 +17,18 @@ class AnalyzeCommand {
             this.validateInput(args, options);
             const packageNames = args;
             const reports = [];
-            for (const packageName of packageNames) {
-                const version = options.version || 'latest';
+            for (const packageSpec of packageNames) {
+                let packageName;
+                let version;
+                if (packageSpec.includes('@') && !packageSpec.startsWith('@')) {
+                    const lastAtIndex = packageSpec.lastIndexOf('@');
+                    packageName = packageSpec.substring(0, lastAtIndex);
+                    version = packageSpec.substring(lastAtIndex + 1);
+                }
+                else {
+                    packageName = packageSpec;
+                    version = options.version || 'latest';
+                }
                 const packageInfo = await this.npmClient.getPackageInfo(packageName, version);
                 let report = null;
                 if (options.cache !== false) {
@@ -64,6 +74,9 @@ class AnalyzeCommand {
             }
             if (error.message.includes('AnalysisTimeout')) {
                 return 6;
+            }
+            if (error.message.includes('PackageNotFound') || error.message.includes('not found for package')) {
+                return 5;
             }
             return 7;
         }

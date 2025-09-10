@@ -35,8 +35,20 @@ export class AnalyzeCommand {
       const packageNames = args;
       const reports = [];
 
-      for (const packageName of packageNames) {
-        const version = options.version || 'latest';
+      for (const packageSpec of packageNames) {
+        // Parse package@version syntax
+        let packageName: string;
+        let version: string;
+        
+        if (packageSpec.includes('@') && !packageSpec.startsWith('@')) {
+          // Handle package@version syntax (but not scoped packages like @types/node)
+          const lastAtIndex = packageSpec.lastIndexOf('@');
+          packageName = packageSpec.substring(0, lastAtIndex);
+          version = packageSpec.substring(lastAtIndex + 1);
+        } else {
+          packageName = packageSpec;
+          version = options.version || 'latest';
+        }
         
         // Get package info
         const packageInfo = await this.npmClient.getPackageInfo(packageName, version);
@@ -101,6 +113,9 @@ export class AnalyzeCommand {
       }
       if (error.message.includes('AnalysisTimeout')) {
         return 6;
+      }
+      if (error.message.includes('PackageNotFound') || error.message.includes('not found for package')) {
+        return 5; // Package not found
       }
       
       return 7; // Internal error

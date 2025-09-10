@@ -3,6 +3,7 @@ import { DependencyTree } from '../models/DependencyTree';
 export declare class NPMClient {
     private registryUrl;
     private cache;
+    private withdrawnDetector;
     constructor(options?: {
         registryUrl?: string;
     });
