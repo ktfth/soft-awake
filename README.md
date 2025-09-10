@@ -46,7 +46,7 @@ npm install -g soft-awake
 ### Install from Source
 
 ```bash
-git clone https://github.com/your-org/soft-awake.git
+git clone https://github.com/ktfth/soft-awake.git
 cd soft-awake
 npm install
 npm run build
@@ -475,7 +475,7 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 ### Development Setup
 
 ```bash
-git clone https://github.com/your-org/soft-awake.git
+git clone https://github.com/ktfth/soft-awake.git
 cd soft-awake
 npm install
 npm run dev
@@ -511,8 +511,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 - **Documentation**: [https://soft-awake.dev/docs](https://soft-awake.dev/docs)
-- **Issues**: [GitHub Issues](https://github.com/your-org/soft-awake/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-org/soft-awake/discussions)
+- **Issues**: [GitHub Issues](https://github.com/ktfth/soft-awake/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ktfth/soft-awake/discussions)
 - **Security**: security@soft-awake.dev
 
 ## 🙏 Acknowledgments
